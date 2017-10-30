@@ -1,25 +1,24 @@
 import nltk, re
 
 """
-    AmbiGO, the automated ambiguity detecting tool
+    AmbiGO, the automated ambiguity detection tool
     Copyright (C) 2017,  Reza Khezri
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
+    the Free Software Foundation version 3.
 
     This program is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details,
-    <http://www.gnu.org/licenses/>.
+    GNU General Public License for more details:
+    <http://www.gnu.org/licenses/>
 """
 
 """ Google search API module"""
 import json, requests
-key = 'AIzaSyATzR20hFntnIWRp2FMankSWjPtCY_mHZQ'
-cx = '001942896367296377826:pdz96dji3bw'
+key = [please obtain yours]
+cx = [please obtain yours]
 url = "https://www.googleapis.com/customsearch/v1"
 
 def query_hit(q):
@@ -71,11 +70,7 @@ linkingV = ["am", "is", "are",
             "remain", "remains", "remained",
             "feel", "feels",  "felt",
             "appear", "appears", "appeared",
-            "grow", "grows", "grew", "grown"
-            "smell", "smells", "smelled",
-            "sound", "sounds", "sounded",
-            "taste", "tastes", "tasted",
-            "turn", "turns", "turned"]
+            "look", "looks", "looked"]
 
 def RE_pars(toks, amb_patt):
     tagged = nltk.pos_tag(toks)
@@ -90,7 +85,6 @@ def RE_pars(toks, amb_patt):
 
 
 def syntactic(sent):
-    
     stag = "<a href=''><span style='background:%s; color:white' title='syntactic ambiguity, type %s. %s'>"
     etag = "</span></a>"
     toks = nltk.word_tokenize(sent)
@@ -164,8 +158,7 @@ def syntactic(sent):
         return ' '.join(toks)      
 
 
-            #ate a pizza with fork / ate a pizza with mushroom
-
+    #I saw a boy with a telescope / I saw a tree with a telescope
     elif PPA_fishNet!=[] and PPA_fishNet[0][0] not in linkingV:
         for (w, t) in PPA_fishNet:
             if t == "IN":
